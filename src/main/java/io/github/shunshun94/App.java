@@ -31,8 +31,17 @@ public class App
 			System.out.println((Long)result2 + 10);
 
 			// 実行ディレクトリを MyJRuby/src/main/resources/BCDice/src にしている
+			// ソースコードは https://github.com/ysakasin/bcdice-api/blob/master/lib/bcdice_wrap.rb からコピペ
 			engine.eval("$:.unshift File.dirname(__FILE__)");
 			engine.eval("require \"./bcdiceCore\"\nrequire \"diceBot/DiceBot\"\nrequire \"diceBot/DiceBotLoader\"");
+			engine.eval("DICEBOTS = ([DiceBot.new] + DiceBotLoader.collectDiceBots).\r\n" + 
+					"    map { |diceBot| [diceBot.id, diceBot] }.\r\n" + 
+					"    to_h.\r\n" + 
+					"    freeze");
+			engine.eval("SYSTEMS = DICEBOTS.keys.\r\n" + 
+					"    sort.\r\n" + 
+					"    freeze");
+			engine.eval("puts SYSTEMS");
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}
