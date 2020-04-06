@@ -29,6 +29,10 @@ public class App
 			Object result2 = engine.get("count");
 			System.out.println(result2.getClass().getName() + ": " + result2);
 			System.out.println((Long)result2 + 10);
+
+			// 実行ディレクトリを MyJRuby/src/main/resources/BCDice/src にしている
+			engine.eval("$:.unshift File.dirname(__FILE__)");
+			engine.eval("require \"./bcdiceCore\"\nrequire \"diceBot/DiceBot\"\nrequire \"diceBot/DiceBotLoader\"");
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}

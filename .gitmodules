@@ -1,0 +1,3 @@
+[submodule "src/main/resources/BCDice"]
+	path = src/main/resources/BCDice
+	url = https://github.com/bcdice/BCDice.git
